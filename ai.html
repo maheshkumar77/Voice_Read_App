@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Answer App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .answer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9f7ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ask a Question</h1>
+        <input type="text" id="userInput" placeholder="Type your question here...">
+        <button onclick="handleSubmit()">Get Answer</button>
+
+        <div id="answer" class="answer" style="display: none;"></div>
+    </div>
+
+    <script>
+        const data = [
+            { "question": "What is the capital of France?", "answer": "The capital of France is Paris." },
+            { "question": "Who invented the telephone?", "answer": "The telephone was invented by Alexander Graham Bell." },
+            { "question": "What is the largest planet in the solar system?", "answer": "Jupiter is the largest planet in the solar system." },
+            { "question": "How many continents are there?", "answer": "There are seven continents: Africa, Antarctica, Asia, Europe, North America, South America, and Australia." },
+            { "question": "What is the boiling point of water?", "answer": "The boiling point of water is 100°C (212°F) at sea level." },
+            { "question": "How much water should I drink daily?", "answer": "It is recommended to drink about 8 glasses (2 liters) of water per day." },
+            { "question": "What are the symptoms of a common cold?", "answer": "Symptoms include a runny nose, sore throat, cough, and mild fever." },
+            { "question": "How can I improve my sleep quality?", "answer": "Maintain a regular sleep schedule, avoid screens before bed, and create a comfortable sleep environment." },
+            { "question": "Is it okay to exercise every day?", "answer": "Yes, but ensure you vary the intensity and allow time for recovery." },
+            { "question": "What foods are high in protein?", "answer": "Foods like eggs, chicken, fish, beans, and nuts are high in protein." },
+            { "question": "How do I reset my password?", "answer": "Go to the login page, click 'Forgot Password,' and follow the instructions." },
+            { "question": "What is the difference between RAM and ROM?", "answer": "RAM is temporary memory used for active tasks, while ROM is permanent memory for storing firmware." },
+            { "question": "How do I update my phone's operating system?", "answer": "Go to Settings > System > Software Update and follow the prompts." },
+            { "question": "What is cloud storage?", "answer": "Cloud storage is a service that allows you to store data on remote servers." }
+        ];
+
+        // Function to handle user input and return an answer
+        function getAnswer(userInput) {
+            const normalizedInput = userInput.trim().toLowerCase();
+
+            for (let item of data) {
+                // Normalize the question
+                const normalizedQuestion = item.question.toLowerCase();
+
+                // Check if the user's input is a part of the question or closely matches
+                if (normalizedQuestion.includes(normalizedInput)) {
+                    return item.answer;
+                }
+            }
+
+            return "Sorry, I couldn't find an answer to that.";
+        }
+
+        // Function to handle the form submission
+        function handleSubmit() {
+            const userInput = document.getElementById("userInput").value;
+            const answerDiv = document.getElementById("answer");
+
+            // Get the answer and display it
+            const answer = getAnswer(userInput);
+            answerDiv.textContent = answer;
+            answerDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>
